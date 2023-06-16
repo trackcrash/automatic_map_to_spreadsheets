@@ -1,5 +1,4 @@
 import gspread
-import random
 import pandas as pd
 import tkinter as tk
 from tkinter import messagebox
@@ -21,9 +20,9 @@ root.geometry("300x300")
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_extension('extension_5_6_0_0.crx')
 scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
-cred = tk.filedialog.askopenfilename(initialdir = "./",title = "Select file",filetypes = (("json files","*.json"),("all files","*.*")))
+#cred = tk.filedialog.askopenfilename(initialdir = "./",title = "Select file",filetypes = (("json files","*.json"),("all files","*.*")))
 #스프레드 시트 api넣기 나중에 파일선택으로 교체해주기
-creds = ServiceAccountCredentials.from_json_keyfile_name(cred, scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name('api-project-92887753-a2f2c523fcd2.json', scope)
 client = gspread.authorize(creds)
 #비디오 길이 체크
 def check_video_lengths():
@@ -115,7 +114,7 @@ def submit():
     number_of_songs = int(e2.get())
     start_time = int(e3.get())
     doc = client.open_by_url(spreadsheet_url)
-    sheet = doc.get_worksheet(1)
+    sheet = doc.get_worksheet(2)
     
     data = sheet.get_all_records()
 
